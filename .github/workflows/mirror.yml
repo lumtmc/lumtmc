@@ -28,8 +28,9 @@ jobs:
           git clone --bare "https://github.com/${REPO}.git" mirror-repo.git
           cd mirror-repo.git
           
-          # Update the insteadOf rule for the mirror push
-          git config --global --replace-all url."https://${MIRROR_TOKEN}@github.com/".insteadOf "https://github.com/"
+          # Remove the previous insteadOf rule and add the new one for the mirror push
+          git config --global --remove-section url."https://x-access-token:${GITHUB_TOKEN}@github.com/"
+          git config --global url."https://${MIRROR_TOKEN}@github.com/".insteadOf "https://github.com/"
           
           # 2. Force push the mirror to the target repository
           git push --mirror "https://github.com/lumtmc/.github.git"
