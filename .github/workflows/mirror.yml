@@ -30,7 +30,7 @@ jobs:
           
           # Remove the previous insteadOf rule and add the new one for the mirror push
           git config --global --remove-section url."https://x-access-token:${GITHUB_TOKEN}@github.com/"
-          git config --global url."https://${MIRROR_TOKEN}@github.com/".insteadOf "https://github.com/"
           
+          # Use the MIRROR_TOKEN directly in the remote URL for the push to avoid insteadOf conflicts
           # 2. Force push the mirror to the target repository
-          git push --mirror "https://github.com/lumtmc/.github.git"
+          git push --mirror "https://${MIRROR_TOKEN}@github.com/lumtmc/.github.git"
